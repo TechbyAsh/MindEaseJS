@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Animated, Easing, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
@@ -77,6 +77,40 @@ const GroundingDescription = styled.Text`
   color: #555;
   line-height: 22px;
 `;
+
+export default function SOSScreen() {
+  const [breathingState, setBreathingState] = useState('Breathe');
+  const animatedValue = useRef(new Animated.Value(1)).current;
+  
+  useEffect(() => {
+    // Start the breathing animation when component mounts
+    const breatheIn = Animated.timing(animatedValue, {
+      toValue: 1.3,
+      duration: 4000,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: true
+    });
+    
+    const breatheOut = Animated.timing(animatedValue, {
+      toValue: 1,
+      duration: 4000,
+      easing: Easing.in(Easing.cubic),
+      useNativeDriver: true
+    });
+    
+    // Start the breathing sequence
+    Animated.loop(
+      Animated.sequence([
+        breatheIn,
+        breatheOut
+      ])
+    ).start();
+    
+    // Cleanup animation on unmount
+    return () => {
+      animatedValue.stopAnimation();
+    };
+  }, []);
 
 const HelpButton = styled.TouchableOpacity`
   background-color: #6A5ACD;

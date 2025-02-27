@@ -141,14 +141,17 @@ const breathingExercises = [
 ];
 
 export default function BreathingScreen() {
-  const [selectedExercise, setSelectedExercise] = useState(breathingExercises[0]);
+  const [selectedExercise, setSelectedExercise] = useState(null);
   const [isBreathing, setIsBreathing] = useState(false);
   const [breathingState, setBreathingState] = useState('Ready');
   const [cycles, setCycles] = useState(0);
   const animatedValue = useRef(new Animated.Value(1)).current;
   const breathingAnimation = useRef(null);
 
+  // Initialize state in useEffect instead of during render
   useEffect(() => {
+    setSelectedExercise(breathingExercises[0]);
+    
     return () => {
       if (breathingAnimation.current) {
         breathingAnimation.current.stop();

@@ -286,7 +286,7 @@ export default function MeditationScreen() {
 
         <SectionTitle>All Meditations</SectionTitle>
         <ListContainer>
-          {allMeditations.map(meditation => (
+          {allMeditations && allMeditations.map(meditation => (
             <ListItem key={meditation.id}>
               <ListItemImage source={{ uri: meditation.image }} />
               <ListItemContent>

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
@@ -52,20 +53,22 @@ function HomeTabs() {
 
 export default function AppNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Main" component={HomeTabs} />
-      <Stack.Screen 
-        name="SOS" 
-        component={SOSScreen} 
-        options={{ 
-          headerShown: true,
-          title: 'SOS Calm Down',
-          headerStyle: {
-            backgroundColor: '#6A5ACD',
-          },
-          headerTintColor: '#fff',
-        }} 
-      />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Main" component={HomeTabs} />
+        <Stack.Screen 
+          name="SOS" 
+          component={SOSScreen} 
+          options={{ 
+            headerShown: true,
+            title: 'SOS Calm Down',
+            headerStyle: {
+              backgroundColor: '#6A5ACD',
+            },
+            headerTintColor: '#fff',
+          }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

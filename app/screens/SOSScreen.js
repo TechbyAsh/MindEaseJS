@@ -78,40 +78,6 @@ const GroundingDescription = styled.Text`
   line-height: 22px;
 `;
 
-export default function SOSScreen() {
-  const [breathingState, setBreathingState] = useState('Breathe');
-  const animatedValue = useRef(new Animated.Value(1)).current;
-  
-  useEffect(() => {
-    // Start the breathing animation when component mounts
-    const breatheIn = Animated.timing(animatedValue, {
-      toValue: 1.3,
-      duration: 4000,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true
-    });
-    
-    const breatheOut = Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 4000,
-      easing: Easing.in(Easing.cubic),
-      useNativeDriver: true
-    });
-    
-    // Start the breathing sequence
-    Animated.loop(
-      Animated.sequence([
-        breatheIn,
-        breatheOut
-      ])
-    ).start();
-    
-    // Cleanup animation on unmount
-    return () => {
-      animatedValue.stopAnimation();
-    };
-  }, []);
-
 const HelpButton = styled.TouchableOpacity`
   background-color: #6A5ACD;
   border-radius: 10px;
@@ -126,7 +92,7 @@ const HelpButtonText = styled.Text`
   font-weight: bold;
 `;
 
-const SOSScreen=() => {
+export default function SOSScreen() {
   const [breathingState, setBreathingState] = useState('Breathe in');
   const animatedValue = new Animated.Value(1);
 
@@ -226,4 +192,5 @@ const SOSScreen=() => {
       </ScrollView>
     </Container>
   );
+};
 

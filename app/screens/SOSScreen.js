@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Animated, Easing, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -193,4 +192,3 @@ export default function SOSScreen() {
     </Container>
   );
 }
-

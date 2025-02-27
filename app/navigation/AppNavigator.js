@@ -1,9 +1,9 @@
 
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
 
 // Import screens
 import HomeScreen from '../screens/HomeScreen';
@@ -22,12 +22,12 @@ function HomeTabs() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          
+
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Meditate') {
-            iconName = focused ? 'leaf' : 'leaf-outline';
-          } else if (route.name === 'Breathe') {
+          } else if (route.name === 'Meditation') {
+            iconName = focused ? 'flower' : 'flower-outline';
+          } else if (route.name === 'Breathing') {
             iconName = focused ? 'water' : 'water-outline';
           } else if (route.name === 'Community') {
             iconName = focused ? 'people' : 'people-outline';
@@ -39,12 +39,15 @@ function HomeTabs() {
         },
         tabBarActiveTintColor: '#6A5ACD',
         tabBarInactiveTintColor: 'gray',
-        headerShown: false,
+        tabBarStyle: {
+          paddingBottom: 5,
+          height: 60,
+        },
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Meditate" component={MeditationScreen} />
-      <Tab.Screen name="Breathe" component={BreathingScreen} />
+      <Tab.Screen name="Meditation" component={MeditationScreen} />
+      <Tab.Screen name="Breathing" component={BreathingScreen} />
       <Tab.Screen name="Community" component={CommunityScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

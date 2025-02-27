@@ -192,5 +192,5 @@ export default function SOSScreen() {
       </ScrollView>
     </Container>
   );
-};
+}
 

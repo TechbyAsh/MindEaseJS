@@ -141,7 +141,7 @@ const breathingExercises = [
 ];
 
 export default function BreathingScreen() {
-  const [selectedExercise, setSelectedExercise] = useState(null);
+  const [selectedExercise, setSelectedExercise] = useState(breathingExercises[0]);
   const [isBreathing, setIsBreathing] = useState(false);
   const [breathingState, setBreathingState] = useState('Ready');
   const [cycles, setCycles] = useState(0);
@@ -291,7 +291,7 @@ export default function BreathingScreen() {
           {breathingExercises.map(exercise => (
             <ExerciseCard 
               key={exercise.id}
-              selected={selectedExercise.id === exercise.id}
+              selected={selectedExercise?.id === exercise.id}
               onPress={() => {
                 if (!isBreathing) {
                   setSelectedExercise(exercise);

@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={({ route }) => ({ headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 

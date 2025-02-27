@@ -165,7 +165,7 @@ export default function HomeScreen({ navigation }) {
         <ActionCardsContainer>
           <ActionCard 
             color="#e6e6fa" 
-            onPress={() => navigation.navigate('Meditate')}
+            onPress={() => navigation.navigate('Meditation')}
           >
             <ActionTitle>Meditation</ActionTitle>
             <ActionDescription>Take a moment to center yourself</ActionDescription>

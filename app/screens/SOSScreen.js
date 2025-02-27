@@ -126,7 +126,7 @@ const HelpButtonText = styled.Text`
   font-weight: bold;
 `;
 
-export default function SOSScreen() {
+const SOSScreen=() => {
   const [breathingState, setBreathingState] = useState('Breathe in');
   const animatedValue = new Animated.Value(1);
 
@@ -226,4 +226,4 @@ export default function SOSScreen() {
       </ScrollView>
     </Container>
   );
-}
+

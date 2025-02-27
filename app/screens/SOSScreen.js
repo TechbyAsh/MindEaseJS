@@ -105,21 +105,21 @@ export default function SOSScreen() {
       toValue: 1.3,
       duration: 4000,
       easing: Easing.out(Easing.cubic),
-      useNativeDriver: true
+      useNativeDriver: false // Changed for web compatibility
     });
 
     const holdBreath = Animated.timing(animatedValue, {
       toValue: 1.3,
       duration: 2000,
       easing: Easing.linear,
-      useNativeDriver: true
+      useNativeDriver: false // Changed for web compatibility
     });
 
     const breathOut = Animated.timing(animatedValue, {
       toValue: 1,
       duration: 4000,
       easing: Easing.in(Easing.cubic),
-      useNativeDriver: true
+      useNativeDriver: false // Changed for web compatibility
     });
 
     Animated.sequence([

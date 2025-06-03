@@ -234,8 +234,8 @@ export default function ProfileScreen() {
           <Avatar>
             <Ionicons name="person" size={50} color="#bbb" />
           </Avatar>
-          <UserName>Alex Johnson</UserName>
-          <UserBio>Finding peace in a busy world, one breath at a time.</UserBio>
+          <UserName>Ashley Johnson</UserName>
+          <UserBio>stressed out building this app.</UserBio>
           
           <StatsContainer>
             <StatItem>

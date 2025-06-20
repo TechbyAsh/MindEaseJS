@@ -3,15 +3,19 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 // Import screens
-import HomeScreen from '../screens/HomeScreen';
-import MeditationScreen from '../screens/MeditationScreen';
-import BreathingScreen from '../screens/BreathingScreen';
-import CommunityScreen from '../screens/CommunityScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import SOSScreen from '../screens/SOSScreen';
+import HomeScreen from '../../src/screens/HomeScreen';
+import MeditationScreen from '../../src/screens/MeditationScreen';
+import BreathingScreen from '../../src/screens/BreathingScreen';
+import CommunityScreen from '../../src/screens/CommunityScreen';
+import ProfileScreen from '../../src/screens/ProfileScreen';
+import SOSScreen from '../../src/screens/SOSScreen';
+
+// Import custom components
+import CustomTabBar from '../../src/components/CustomTabBar';
+import { theme } from '../../src/theme/theme';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,31 +23,11 @@ const Stack = createStackNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({ headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Meditation') {
-            iconName = focused ? 'flower' : 'flower-outline';
-          } else if (route.name === 'Breathing') {
-            iconName = focused ? 'water' : 'water-outline';
-          } else if (route.name === 'Community') {
-            iconName = focused ? 'people' : 'people-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'person' : 'person-outline';
-          }
-
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: '#6A5ACD',
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {
-          paddingBottom: 5,
-          height: 60,
-        },
-      })}
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+      }}
+      tabBar={props => <CustomTabBar {...props} />}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Meditation" component={MeditationScreen} />
@@ -57,7 +41,13 @@ function HomeTabs() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <StatusBar style="dark" />
+      <Stack.Navigator 
+        screenOptions={{ 
+          headerShown: false,
+          cardStyle: { backgroundColor: theme.colors.background }
+        }}
+      >
         <Stack.Screen name="Main" component={HomeTabs} />
         <Stack.Screen 
           name="SOS" 
@@ -66,9 +56,9 @@ export default function AppNavigator() {
             headerShown: true,
             title: 'SOS Calm Down',
             headerStyle: {
-              backgroundColor: '#6A5ACD',
+              backgroundColor: theme.colors.secondary,
             },
-            headerTintColor: '#fff',
+            headerTintColor: theme.colors.white,
           }} 
         />
       </Stack.Navigator>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import { theme } from '../theme/theme';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { useAuth } from '../context/AuthContext';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -282,10 +283,18 @@ const settingsItems = [
     icon: 'information-circle-outline',
     color: theme.colors.tertiary + '40',
   },
+  {
+    id: 'logout',
+    title: 'Logout',
+    icon: 'log-out-outline',
+    color: theme.colors.error + '40',
+  },
 ];
 
 export default function ProfileScreen({ navigation }) {
+  const { logout } = useAuth();
   const [activeTab, setActiveTab] = useState('progress');
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Container>
@@ -437,11 +446,50 @@ export default function ProfileScreen({ navigation }) {
           <SettingsContainer>
             <SectionTitle>Settings</SectionTitle>
             {settingsItems.map(item => (
-              <SettingsItem key={item.id} onPress={() => {}}>
+              <SettingsItem 
+                key={item.id} 
+                onPress={() => {
+                  if (item.id === 'logout') {
+                    Alert.alert(
+                      'Logout',
+                      'Are you sure you want to logout?',
+                      [
+                        {
+                          text: 'Cancel',
+                          style: 'cancel',
+                        },
+                        {
+                          text: 'Logout',
+                          style: 'destructive',
+                          onPress: async () => {
+                            setIsLoading(true);
+                            try {
+                              await logout();
+                              // Navigation will be handled by RootNavigator based on auth state
+                            } catch (error) {
+                              console.error('Logout error:', error);
+                              Alert.alert('Error', 'Failed to logout. Please try again.');
+                            } finally {
+                              setIsLoading(false);
+                            }
+                          },
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  } else {
+                    // Handle other settings items
+                  }
+                }}
+                disabled={isLoading && item.id === 'logout'}
+              >
                 <SettingsIcon color={item.color}>
-                  <Ionicons name={item.icon} size={20} color={theme.colors.primary} />
+                  <Ionicons name={item.icon} size={20} color={item.id === 'logout' ? theme.colors.error : theme.colors.primary} />
                 </SettingsIcon>
-                <SettingsText>{item.title}</SettingsText>
+                <SettingsText style={item.id === 'logout' ? { color: theme.colors.error } : {}}>
+                  {item.title}
+                  {isLoading && item.id === 'logout' ? ' (Logging out...)' : ''}
+                </SettingsText>
                 <Ionicons name="chevron-forward" size={20} color={theme.colors.text.light} />
               </SettingsItem>
             ))}

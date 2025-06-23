@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StatusBar } from 'expo-status-bar';
 
 // Import screens
 import HomeScreen from '../../src/screens/HomeScreen';
@@ -40,14 +38,12 @@ function HomeTabs() {
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <StatusBar style="dark" />
-      <Stack.Navigator 
-        screenOptions={{ 
-          headerShown: false,
-          cardStyle: { backgroundColor: theme.colors.background }
-        }}
-      >
+    <Stack.Navigator 
+      screenOptions={{ 
+        headerShown: false,
+        cardStyle: { backgroundColor: theme.colors.background }
+      }}
+    >
         <Stack.Screen name="Main" component={HomeTabs} />
         <Stack.Screen 
           name="SOS" 
@@ -62,6 +58,5 @@ export default function AppNavigator() {
           }} 
         />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }

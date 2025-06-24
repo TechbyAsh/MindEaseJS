@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../../src/screens/HomeScreen';
 import MeditationScreen from '../../src/screens/MeditationScreen';
 import BreathingScreen from '../../src/screens/BreathingScreen';
-import CommunityScreen from '../../src/screens/CommunityScreen';
+import JournalScreen from '../../src/screens/CommunityScreen';
 import ProfileScreen from '../../src/screens/ProfileScreen';
 import SOSScreen from '../../src/screens/SOSScreen';
 
@@ -30,7 +29,7 @@ function HomeTabs() {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Meditation" component={MeditationScreen} />
       <Tab.Screen name="Breathing" component={BreathingScreen} />
-      <Tab.Screen name="Community" component={CommunityScreen} />
+      <Tab.Screen name="Journal" component={JournalScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );

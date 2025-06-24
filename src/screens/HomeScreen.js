@@ -6,6 +6,7 @@ import { theme } from '../theme/theme';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { useAuth } from '../context/AuthContext';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -137,6 +138,7 @@ const SOSButton = styled(Button)`
 `;
 
 export default function HomeScreen({ navigation }) {
+  const { currentUser } = useAuth();
   const [selectedMood, setSelectedMood] = useState(null);
   
   const moods = [
@@ -167,7 +169,7 @@ export default function HomeScreen({ navigation }) {
         />
         
         <GreetingSection>
-          <Greeting>{getGreeting()}, Sarina!</Greeting>
+          <Greeting>{getGreeting()}, {currentUser?.name || 'Friend'}!</Greeting>
           <SubGreeting>How are you feeling today?</SubGreeting>
         </GreetingSection>
 

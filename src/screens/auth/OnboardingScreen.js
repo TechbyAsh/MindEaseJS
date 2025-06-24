@@ -5,6 +5,7 @@ import { theme } from '../../theme/theme';
 import Button from '../../components/Button';
 import { useAuth } from '../../context/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -26,12 +27,6 @@ const ImageContainer = styled.View`
   margin-top: ${theme.spacing.xl}px;
   align-items: center;
   justify-content: center;
-`;
-
-const SlideImage = styled.Image`
-  width: 100%;
-  height: 100%;
-  resize-mode: contain;
 `;
 
 const SlideTitle = styled.Text`
@@ -89,25 +84,25 @@ const slides = [
     id: '1',
     title: 'Welcome to MindEase',
     text: 'Your journey to mental wellness starts here. MindEase helps you manage stress, anxiety, and improve your overall well-being.',
-    image: require('../../../assets/images/icon.png')
+    animationSource: require('../../../assets/images/onboarding/Animation - 1750725331350.json')
   },
   {
     id: '2',
     title: 'Daily Meditation',
     text: 'Access guided meditations tailored to your needs. Just a few minutes each day can transform your mental health.',
-    image: require('../../../assets/images/icon.png')
+    animationSource: require('../../../assets/images/onboarding/Animation - 1750725331350.json')
   },
   {
     id: '3',
     title: 'Breathing Exercises',
     text: 'Learn breathing techniques that help reduce anxiety and bring calm to your day, anytime and anywhere.',
-    image: require('../../../assets/images/icon.png')
+    animationSource: require('../../../assets/images/onboarding/Animation - 1750725331350.json')
   },
   {
     id: '4',
     title: 'Supportive Community',
     text: 'Connect with others on the same journey. Share experiences, give support, and never feel alone.',
-    image: require('../../../assets/images/icon.png')
+    animationSource: require('../../../assets/images/onboarding/Animation - 1750725331350.json')
   }
 ];
 
@@ -117,6 +112,7 @@ export default function OnboardingScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const scrollX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(null);
+  const animationRefs = useRef([]);
 
   const handleNext = async () => {
     if (currentIndex < slides.length - 1) {
@@ -147,11 +143,19 @@ export default function OnboardingScreen({ navigation }) {
     }
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     return (
       <SlideContainer>
         <ImageContainer>
-          <SlideImage source={item.image} />
+          <LottieView
+            ref={animation => {
+              animationRefs.current[index] = animation;
+            }}
+            source={item.animationSource}
+            autoPlay
+            loop
+            style={{ width: '100%', height: '100%' }}
+          />
         </ImageContainer>
         <SlideTitle>{item.title}</SlideTitle>
         <SlideText>{item.text}</SlideText>

@@ -70,7 +70,9 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
         } else if (route.name === 'Meditation') {
           iconName = isFocused ? 'flower' : 'flower-outline';
         } else if (route.name === 'Breathing') {
-          iconName = 'water';
+          iconName = 'disc';
+        } else if (route.name === 'Journal') {
+          iconName = isFocused ? 'book' : 'book-outline';
         } else if (route.name === 'Community') {
           iconName = isFocused ? 'people' : 'people-outline';
         } else if (route.name === 'Profile') {
